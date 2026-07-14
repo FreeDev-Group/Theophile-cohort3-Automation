@@ -1,12 +1,14 @@
 import { test, expect } from '@playwright/test';
 
-test('createaccountkabidu', async ({ page }) => {
+test.only('createaccountkabidu', async ({ page }) => {
+  // 1. Générer des données uniques à chaque exécution
+  const timestamp = new Date().getTime();
+  const uniqueUsername = `kabidusage_${timestamp}`;
+  const uniqueEmail = `kabidusage_${timestamp}@gmail.com`;
+
   await page.goto('https://student.michaelkentburns.com/wp-login.php?action=register')
-  await page.getByRole('link', { name: 'User' }).click();
-  await page.getByRole('link', { name: 'Register as Student' }).click();
-  await page.getByRole('textbox', { name: 'Username' }).fill('kabidusage');
-  await page.getByRole('textbox', { name: 'Username' }).press('Tab');
-  await page.getByRole('textbox', { name: 'Email' }).fill('kabidusage7@gmail.com');
+  await page.getByLabel ('Username').fill('uniqueUsername');
+  await page.getByLabel('Email').fill('uniqueEmail');
   await page.getByRole('button', { name: 'Register' }).click();
   await page.close();
 })
