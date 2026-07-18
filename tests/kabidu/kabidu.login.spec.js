@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test.only('createaccountkabidu', async ({ page }) => {
+test('createaccountkabidu', async ({ page }) => {
   // 1. Générer des données uniques à chaque exécution
   const timestamp = new Date().getTime();
   const uniqueUsername = `kabidusage_${timestamp}`;
