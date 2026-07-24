@@ -15,7 +15,7 @@ test('kabidusagemg', async ({ page }) => {
 
   await page.getByRole('link', { name: 'testing_provide_feedback_by_kabidusae' }).click();
   await expect(page.getByRole('region', { name: 'We value your privacy' })).toBeVisible();
-  
+
   await expect(page.getByRole('region', { name: 'We value your privacy' })).toBeVisible();
 
   await page.getByRole('link', { name: 'Student' }).click();
