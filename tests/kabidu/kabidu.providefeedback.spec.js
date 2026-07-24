@@ -1,9 +1,7 @@
 import { test, expect } from '@playwright/test';
 
-
-test('kabiduprovidefeedback', async ({ page }) => {
+test('kabidusagemg', async ({ page }) => {
   await page.goto('https://student.michaelkentburns.com/wp-login.php')
-  await expect(page.getByRole('button', { name: 'Show password' })).toBeVisible();
 
   await page.getByRole('textbox', { name: 'Username or Email Address' }).click();
   await page.getByRole('textbox', { name: 'Username or Email Address' }).fill('kabidusage7@gmail.com');
@@ -15,15 +13,12 @@ test('kabiduprovidefeedback', async ({ page }) => {
   await page.getByRole('link', { name: 'All Surveys' }).click();
   await expect(page.getByRole('region', { name: 'We value your privacy' })).toBeVisible();
 
-  await page.getByRole('link', { name: 'kabidu_testing with playwright' }).click();
+  await page.getByRole('link', { name: 'testing_provide_feedback_by_kabidusae' }).click();
   await expect(page.getByRole('region', { name: 'We value your privacy' })).toBeVisible();
-
-  await page.getByRole('textbox', { name: 'Your answer...' }).click();
-  await page.getByRole('textbox', { name: 'Your answer...' }).fill('kabidusage7@gmail.com');
-  await page.getByRole('button', { name: 'Submit' }).click();
+  
   await expect(page.getByRole('region', { name: 'We value your privacy' })).toBeVisible();
 
   await page.getByRole('link', { name: 'Student' }).click();
   await page.getByRole('link', { name: 'Logout' }).click();
   await page.close();
-})
+});
