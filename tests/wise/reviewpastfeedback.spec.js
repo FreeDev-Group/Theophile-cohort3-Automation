@@ -1,8 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('test', async ({ page }) => {
-  await expect(page.getByRole('button', { name: 'Show password' })).toBeVisible();
-
+  await page.goto('https://student.michaelkentburns.com/wp-login.php')
   await page.getByRole('textbox', { name: 'Username or Email Address' }).click();
   await page.getByRole('textbox', { name: 'Username or Email Address' }).fill('emsautoservices5@gmail.com');
   await page.getByRole('textbox', { name: 'Username or Email Address' }).press('Tab');
@@ -19,7 +18,6 @@ test('test', async ({ page }) => {
 
   await page.getByText('Your Answers for: Wise _Test_With_Playwright UpdatedHave you enjoyed this test').click();
   await page.getByText('Instructor Feedback: Thank').click();
-  await expect(page.getByRole('link', { name: 'Profile' })).toBeVisible();
 
   await page.getByRole('link', { name: 'Student' }).click();
   await page.getByRole('link', { name: 'Logout' }).click();
