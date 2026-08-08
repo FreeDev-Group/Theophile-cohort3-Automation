@@ -1,34 +1,45 @@
 import { test, expect } from '@playwright/test';
 
-test('test', async ({ page }) => {
-  await page.goto('https://student.michaelkentburns.com/')
-
-  await page.getByRole('link', { name: 'User' }).click();
+test('wise.manage.survey', async ({ page }) => {
+  await page.goto('https://student.michaelkentburns.com/');
+  await expect(page.getByRole('region', { name: 'We value your privacy' })).toBeVisible();
   await page.getByRole('link', { name: 'Login' }).click();
+  await page.goto('https://student.michaelkentburns.com/wp-login.php');
   await page.getByRole('textbox', { name: 'Username or Email Address' }).fill('guillainwise@gmail.com');
   await page.getByRole('textbox', { name: 'Password' }).click();
+  await page.getByRole('textbox', { name: 'Password' }).fill('|$');
+  await page.getByRole('button', { name: 'Show password' }).click();
+  await expect(page.getByRole('button', { name: 'Hide password' })).toBeVisible();
+  await page.getByRole('textbox', { name: 'Password' }).click();
   await page.getByRole('textbox', { name: 'Password' }).fill('|*Gui_llain@97');
-  await page.getByRole('checkbox', { name: 'Remember Me' }).check();
   await page.getByRole('button', { name: 'Log In' }).click();
   await page.goto('https://student.michaelkentburns.com/wp-admin/');
   await expect(page.getByRole('link', { name: 'Dashboard' })).toBeVisible();
-
   await page.getByRole('link', { name: 'Surveys', exact: true }).click();
-  await expect(page.getByRole('table', { name: 'Table ordered by Date.' })).toBeVisible();
-  await page.locator('#wpbody-content').getByRole('link', { name: 'Add New Survey' }).click();
-  await page.getByRole('textbox', { name: 'Add title' }).fill('wise_manage_survey_by_intructor');
+  await page.getByRole('textbox', { name: 'Add title' }).fill('Wise Testing Manager survey');
+  await page.locator('iframe[title="Rich Text Area. Press Alt-Shift-H for help."]').contentFrame().getByRole('paragraph').click();
+  await page.locator('iframe[title="Rich Text Area. Press Alt-Shift-H for help."]').contentFrame().locator('#tinymce').fill('Only for test');
   await page.getByRole('button', { name: 'Publish', exact: true }).click();
-  await page.goto('https://student.michaelkentburns.com/wp-admin/post.php?post=1514&action=edit');
+  await page.goto('https://student.michaelkentburns.com/wp-admin/post.php?post=2425&action=edit');
+  await page.getByRole('link', { name: 'Dashboard' }).click();
   await expect(page.getByRole('link', { name: 'Dashboard' })).toBeVisible();
-  await page.getByRole('button', { name: 'Edit permalink' }).click();
-  await page.getByRole('textbox', { name: 'URL Slug' }).click();
-  await page.getByRole('textbox', { name: 'URL Slug' }).fill('wise_manage_survey_by_intructor_edit');
-  await page.getByRole('button', { name: 'OK' }).click();
-  await expect(page.getByRole('button', { name: 'Edit permalink' })).toBeVisible();
+  await page.getByRole('link', { name: 'All Surveys' }).click();
+  await expect(page.getByRole('table', { name: 'Table ordered by Date.' })).toBeVisible();
+  await page.getByRole('link', { name: 'Edit “Wise Testing Manager' }).click();
+  await expect(page.getByRole('link', { name: 'Dashboard' })).toBeVisible();
+  await page.getByRole('textbox', { name: 'Add title' }).click();
+  await page.getByRole('textbox', { name: 'Add title' }).fill('Wise Testing Manager survey-Edit');
+  await page.getByRole('textbox', { name: 'Description' }).click();
+  await page.getByRole('textbox', { name: 'Description' }).fill('Description');
+  await page.getByRole('textbox', { name: 'Start Date' }).fill('2026-08-08');
+  await page.getByRole('textbox', { name: 'End Date' }).fill('2026-08-15');
   await page.getByRole('button', { name: 'Update' }).click();
-  await page.goto('https://student.michaelkentburns.com/wp-admin/post.php?post=1514&action=edit');
+  await page.getByRole('link', { name: 'Dashboard' }).click();
   await expect(page.getByRole('link', { name: 'Dashboard' })).toBeVisible();
-  await page.getByRole('link', { name: 'Move to Trash' }).click();
+  await page.getByRole('link', { name: 'All Surveys' }).click();
+  await expect(page.getByRole('table', { name: 'Table ordered by Date.' })).toBeVisible();
+  await page.getByRole('cell', { name: 'Wise Testing Manager survey-' }).click();
+  await page.getByRole('link', { name: 'Move “Wise Testing Manager' }).click();
   await expect(page.getByRole('table', { name: 'Table ordered by Date.' })).toBeVisible();
   await page.getByRole('menuitem', { name: 'Log Out' }).click();
   await page.close();
